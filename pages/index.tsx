@@ -1,86 +1,149 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import MovieCard from '../components/MovieCard'
+import NewComment from '../components/NewComment'
+import SkeletonCard from '../components/SkeletonCard'
+import TopView from '../components/TopView'
+import { sanityClient } from '../lib/sanity'
 
-const Home: NextPage = () => {
+interface Props {
+  movies: Movie[]
+  comments: Comment[]
+}
+
+const Home: React.FC<Props> = ({ movies, comments }) => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (movies) {
+      setTimeout(() => {
+        setLoading(false)
+      }, 3000)
+    }
+  }, [movies])
+
+  //Initialize an array of length 13 and fill it with 0's
+  let skeletonCards = Array(4).fill(0)
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content='Anime Template' />
+        <meta name='keywords' content='Anime, unica, creative, html' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+        <title>Anime</title>
+
+        {/* <!-- Google Font --> */}
+        <link
+          href='https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap'
+          rel='stylesheet'
+        />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap'
+          rel='stylesheet'
+        />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+      <Header />
+      {loading ? (
+        skeletonCards.map((index: number) => <SkeletonCard key={index} />)
+      ) : (
+        <section className='product spad max-w-7xl mx-auto'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-lg-8'>
+                <div className='trending__product'>
+                  <div className='row'>
+                    <div className='col-lg-8 col-md-8 col-sm-8'>
+                      <div className='section-title'>
+                        <h4>Trending Now</h4>
+                      </div>
+                    </div>
+                    <div className='col-lg-4 col-md-4 col-sm-4'>
+                      <div className='btn__all'>
+                        <a href='#' className='primary-btn'>
+                          View All <span className='arrow_right'></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    {movies.map((movie: Movie) => (
+                      <MovieCard key={movie._id} movie={movie} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className='col-lg-4 col-md-6 col-sm-8'>
+                <div className='product__sidebar'>
+                  <TopView />
+                  <div className='product__sidebar__comment'>
+                    <div className='section-title'>
+                      <h5>New Comment</h5>
+                    </div>
+                    {comments.map((comment: Comment) => (
+                      <NewComment key={comment._id} comment={comment} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+      <Footer />
     </div>
   )
 }
 
 export default Home
+
+export const getStaticProps = async () => {
+  const query = `* [_type == 'movie'] {
+                    _id,
+                    title,
+                    slug,
+                    mainImage,
+                    body,
+                    type,
+                    category -> {
+                      title,
+                    },
+                    "comments": * [
+                      _type == "comment" && 
+                      movie._ref == ^._id && 
+                      approved == true
+                    ],
+                    externalLink,
+                  }`
+
+  const movies = await sanityClient.fetch(query)
+
+  const commentsQuery = `
+                          * [_type == 'comment' && approved == true] {
+                            _id,
+                            _createdAt,
+                            comment,
+                            movie -> {
+                              mainImage,
+                              type,
+                              category -> {
+                                title,
+                              },
+                              title,
+                            }
+                        }`
+  const comments = await sanityClient.fetch(commentsQuery)
+
+  return {
+    props: {
+      movies,
+      comments,
+    },
+  }
+}
