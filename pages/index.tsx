@@ -1,6 +1,5 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
+import Script from 'next/script'
 import { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
@@ -26,7 +25,6 @@ const Home: React.FC<Props> = ({ movies, comments }) => {
     }
   }, [movies])
 
-  //Initialize an array of length 13 and fill it with 0's
   let skeletonCards = Array(4).fill(0)
 
   return (
@@ -47,11 +45,23 @@ const Home: React.FC<Props> = ({ movies, comments }) => {
           href='https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap'
           rel='stylesheet'
         />
+
+        {/* <!-- Js Plugins --> */}
+        <Script src='/js/jquery-3.3.1.min.js'></Script>
+        <Script src='/js/bootstrap.min.js'></Script>
+        <Script src='/js/player.js'></Script>
+        <Script src='/js/jquery.nice-select.min.js'></Script>
+        <Script src='/js/mixitup.min.js'></Script>
+        <Script src='/js/jquery.slicknav.js'></Script>
+        <Script src='/js/owl.carousel.min.js'></Script>
+        <Script src='/js/main.js'></Script>
       </Head>
 
       <Header />
       {loading ? (
-        skeletonCards.map((index: number) => <SkeletonCard key={index} />)
+        skeletonCards.map((value: number, index: number) => (
+          <SkeletonCard key={index} />
+        ))
       ) : (
         <section className='product spad max-w-7xl mx-auto'>
           <div className='container'>

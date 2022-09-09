@@ -22,10 +22,10 @@ const Header: React.FC = () => {
                     <Link href='/'>Homepage</Link>
                   </li>
                   <li>
-                    <Link href='/categories'>
+                    <a href='/categories'>
                       Categories
-                      {/*<span className='arrow_carrot-down'></span> */}
-                    </Link>
+                      <span className='arrow_carrot-down'></span>
+                    </a>
                     <ul className='dropdown'>
                       <li>
                         <Link href='/categories'>Categories</Link>
@@ -59,12 +59,12 @@ const Header: React.FC = () => {
           </div>
           <div className='col-lg-2'>
             <div className='header__right'>
-              <Link href='#' className='search-switch'>
+              <a href='#' className='search-switch'>
                 <span className='icon_search'></span>
-              </Link>
-              <Link href='/login'>
+              </a>
+              <a href='/login'>
                 <span className='icon_profile'></span>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
