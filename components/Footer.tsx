@@ -22,16 +22,11 @@ const Footer: React.FC = () => {
             <div className='footer__nav'>
               <ul>
                 <li className='active'>
-                  <Link href='./index.html'>Homepage</Link>
+                  <Link href='/'>Homepage</Link>
                 </li>
+
                 <li>
-                  <Link href='./categories.html'>Categories</Link>
-                </li>
-                <li>
-                  <Link href='./blog.html'>Our Blog</Link>
-                </li>
-                <li>
-                  <Link href='#'>Contacts</Link>
+                  <Link href='/contact'>Contacts</Link>
                 </li>
               </ul>
             </div>
