@@ -48,7 +48,7 @@ const Sidebar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             <li>
               <a
                 href='/'
-                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
+                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
               >
                 <svg
                   aria-hidden='true'
@@ -133,7 +133,7 @@ const Sidebar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             <li>
               <a
                 href='/contact'
-                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
+                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
               >
                 <svg
                   aria-hidden='true'
@@ -151,7 +151,7 @@ const Sidebar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             <li>
               <a
                 href='/login'
-                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
+                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
               >
                 <svg
                   aria-hidden='true'
@@ -172,7 +172,7 @@ const Sidebar: React.FC<Props> = ({ isOpen, setIsOpen }) => {
             <li>
               <a
                 href='/register'
-                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
+                className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
               >
                 <svg
                   aria-hidden='true'
