@@ -47,7 +47,8 @@ const AnimeDetails: React.FC<Props> = ({ movie }) => {
                     }}
                   >
                     <div className='comment'>
-                      <i className='fa fa-comments'></i> {movie.comments.length}
+                      <i className='fa fa-comments'></i>{' '}
+                      {movie.comments?.length}
                     </div>
                     <div className='view'>
                       <i className='fa fa-eye'></i> 9141

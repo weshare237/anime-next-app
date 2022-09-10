@@ -18,7 +18,7 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
         >
           <div className='ep'>18 / 18</div>
           <div className='comment'>
-            <i className='fa fa-comments'></i> {movie.comments.length}
+            <i className='fa fa-comments'></i> {movie.comments?.length}
           </div>
           <div className='view'>
             <i className='fa fa-eye'></i> 9141
@@ -26,8 +26,8 @@ const MovieCard: React.FC<Props> = ({ movie }) => {
         </div>
         <div className='product__item__text'>
           <ul>
+            <li>Active</li>
             <li>{movie.category.title}</li>
-            <li>{movie.type}</li>
           </ul>
           <h5>
             <Link href={`/anime-details/${movie.slug.current}`}>

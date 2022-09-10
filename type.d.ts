@@ -20,7 +20,7 @@ interface Movie {
   }
   quality: string
   externalLink: string
-  comments: Comment[]
+  comments?: Comment[]
   body: [object]
 }
 
@@ -69,4 +69,9 @@ interface Episode {
   saison: {
     serie: Movie
   }
+}
+
+interface Category {
+  _id: string
+  title: string
 }

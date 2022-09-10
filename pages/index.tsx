@@ -22,7 +22,7 @@ const Home: React.FC<Props> = ({ movies, comments }) => {
         setLoading(false)
       }, 3000)
     }
-  }, [movies])
+  }, [movies, comments])
 
   let skeletonCards = Array(4).fill(0)
 

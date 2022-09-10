@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { MdViewList } from 'react-icons/md'
 import Sidebar from './Sidebar'
+import { data } from '../utils/data'
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <>
-      {isOpen && <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} data={data} />}
       <header className='header'>
         <div className='container'>
           <div className='row'>
@@ -32,24 +33,16 @@ const Header: React.FC = () => {
                         <span className='arrow_carrot-down'></span>
                       </a>
                       <ul className='dropdown'>
-                        <li>
-                          <Link href='/categories'>Categories</Link>
-                        </li>
-                        <li>
-                          <Link href='/anime-details'>Anime Details</Link>
-                        </li>
-                        <li>
-                          <Link href='/anime-watching'>Anime Watching</Link>
-                        </li>
-                        <li>
-                          <Link href='/blog-details'>Blog Details</Link>
-                        </li>
-                        <li>
-                          <Link href='/signup'>Sign Up</Link>
-                        </li>
-                        <li>
-                          <Link href='/login'>Login</Link>
-                        </li>
+                        {data?.map((category: Category) => (
+                          <li
+                            key={category._id}
+                            className=' hover:text-blue-600 hover:bg-blue-200 hover:dark:bg-blue-900 hover:dark:text-blue-200'
+                          >
+                            <Link href={`/categories/${category._id}`}>
+                              {category.title}
+                            </Link>
+                          </li>
+                        ))}
                       </ul>
                     </li>
                     <li>

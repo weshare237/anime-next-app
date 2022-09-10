@@ -6,11 +6,6 @@ interface Props {
 }
 
 const ReviewItem = ({ comment }: Props) => {
-  console.log(
-    'date--------------------->',
-    new Date(comment._createdAt).getFullYear()
-  )
-
   return (
     <div className='anime__review__item'>
       <div className='anime__review__item__pic'>
