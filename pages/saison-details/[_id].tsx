@@ -1,22 +1,19 @@
 import React from 'react'
-import StyledBreadCrumb from '../../components/StyledBreadCrumb'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { sanityClient } from '../../lib/sanity'
 import { GetStaticProps } from 'next'
-import PortableText from 'react-portable-text'
 
 interface Props {
   episodes: Episode[]
 }
 
 const SaisonDetails = ({ episodes }: Props) => {
-  console.log(episodes)
   return (
     <>
       <Header />
-      <StyledBreadCrumb />
+
       <section className='anime-details spad'>
         <div className='container'>
           <div className='row'>

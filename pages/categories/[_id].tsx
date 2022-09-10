@@ -12,12 +12,10 @@ interface Props {
 }
 
 const Categories: React.FC<Props> = ({ categoryMovies }) => {
-  console.log(categoryMovies)
-
   return (
     <>
       <Header />
-      <StyledBreadCrumb />
+      <StyledBreadCrumb category={categoryMovies[0].category.title} />
       <section className='product-page spad'>
         <div className='container'>
           <div className='row'>

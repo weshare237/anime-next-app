@@ -1,5 +1,4 @@
 import React from 'react'
-import StyledBreadCrumb from '../../components/StyledBreadCrumb'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -16,7 +15,6 @@ const AnimeWatching = ({ saisons }: Props) => {
   return (
     <>
       <Header />
-      <StyledBreadCrumb />
       <section className='anime-details spad'>
         <div className='container'>
           <div className='row'>

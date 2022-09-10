@@ -31,7 +31,10 @@ const AnimeDetails: React.FC<Props> = ({ movie }) => {
   return (
     <div>
       <Header />
-      <StyledBreadCrumb />
+      <StyledBreadCrumb
+        category={movie.category.title}
+        movieName={movie.title}
+      />
       <section className='anime-details spad'>
         <div className='container'>
           {loading ? (

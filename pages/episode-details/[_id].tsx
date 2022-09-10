@@ -1,11 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import StyledBreadCrumb from '../../components/StyledBreadCrumb'
 import { sanityClient, urlFor } from '../../lib/sanity'
 import { GetStaticProps } from 'next'
 import Header from '../../components/Header'
-import PortableText from 'react-portable-text'
-import Reviews from '../../components/Reviews'
 import SimilarMovie from '../../components/SimilarMovie'
 import Footer from '../../components/Footer'
 
@@ -19,7 +16,6 @@ const EpisodeDetails: React.FC<Props> = ({ episode }) => {
   return (
     <div>
       <Header />
-      <StyledBreadCrumb />
       <section className='anime-details spad'>
         <div className='container'>
           <div className='anime__details__content'>
