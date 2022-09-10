@@ -31,10 +31,7 @@ const AnimeDetails: React.FC<Props> = ({ movie }) => {
   return (
     <div>
       <Header />
-      <StyledBreadCrumb
-        category={movie.category.title}
-        movieName={movie.title}
-      />
+      <StyledBreadCrumb category={movie.category} movieName={movie.title} />
       <section className='anime-details spad'>
         <div className='container'>
           {loading ? (
@@ -219,6 +216,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                   slug,
                   mainImage,
                   category -> {
+                    _id,
                     title,
                   },
                   "comments": * [

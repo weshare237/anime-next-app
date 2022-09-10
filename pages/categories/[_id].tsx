@@ -15,7 +15,7 @@ const Categories: React.FC<Props> = ({ categoryMovies }) => {
   return (
     <>
       <Header />
-      <StyledBreadCrumb category={categoryMovies[0].category.title} />
+      <StyledBreadCrumb category={categoryMovies[0].category} />
       <section className='product-page spad'>
         <div className='container'>
           <div className='row'>
@@ -172,6 +172,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                     body,
                     type,
                     category -> {
+                      _id,
                       title,
                     },
                 }`

@@ -72,6 +72,6 @@ interface Episode {
 }
 
 interface Category {
-  _id: string
+  _id?: string
   title: string
 }
