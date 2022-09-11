@@ -56,7 +56,7 @@ const SaisonDetails = ({ episodes }: Props) => {
                       }}
                     ></div>
                     <p>{episode.description}</p>
-                    <div className='anime__details__btn'>
+                    <div className='anime__details__btn mt-3'>
                       <a href={episode.externalLink} className='watch-btn'>
                         <span>Download Now</span>{' '}
                         <i className='fa fa-download'></i>
