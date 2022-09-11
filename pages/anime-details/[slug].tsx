@@ -149,12 +149,9 @@ const AnimeDetails: React.FC<Props> = ({ movie, saisons }) => {
                     <div className='anime__details__btn'>
                       {saisons.length === 0 ? (
                         <a
-                          href={
-                            movie.type === 'Movie'
-                              ? movie.externalLink
-                              : `/anime-watching/${movie._id}`
-                          }
+                          href={movie.externalLink}
                           className='watch-btn'
+                          target='__blank'
                         >
                           <span>Download Now</span>{' '}
                           <i className='fa fa-download'></i>

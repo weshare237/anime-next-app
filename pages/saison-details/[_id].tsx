@@ -9,6 +9,7 @@ interface Props {
 }
 
 const SaisonDetails = ({ episodes }: Props) => {
+  console.log(episodes)
   return (
     <>
       <Header />
@@ -57,7 +58,11 @@ const SaisonDetails = ({ episodes }: Props) => {
                     ></div>
                     <p>{episode.description}</p>
                     <div className='anime__details__btn mt-3'>
-                      <a href={episode.externalLink} className='watch-btn'>
+                      <a
+                        href={episode.externalLink}
+                        className='watch-btn'
+                        target='__blank'
+                      >
                         <span>Download Now</span>{' '}
                         <i className='fa fa-download'></i>
                       </a>
@@ -176,6 +181,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                       },
                       description, 
                       mainImage,
+                      externalLink,
                   }`
 
   const episodes = await sanityClient.fetch(query, {
