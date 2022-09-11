@@ -12,7 +12,7 @@ import SingleSkeleton from '../../components/SingleSkeleton'
 
 interface Props {
   movie: Movie
-  saisons?: Saison[]
+  saisons: Saison[]
 }
 
 const AnimeDetails: React.FC<Props> = ({ movie, saisons }) => {
@@ -147,7 +147,7 @@ const AnimeDetails: React.FC<Props> = ({ movie, saisons }) => {
                       </div>
                     </div>
                     <div className='anime__details__btn'>
-                      {saisons?.length === 0 ? (
+                      {saisons.length === 0 ? (
                         <a
                           href={
                             movie.type === 'Movie'
@@ -156,7 +156,7 @@ const AnimeDetails: React.FC<Props> = ({ movie, saisons }) => {
                           }
                           className='watch-btn'
                         >
-                          <span>Download Now</span>
+                          <span>Download Now</span>{' '}
                           <i className='fa fa-download'></i>
                         </a>
                       ) : (
@@ -164,7 +164,7 @@ const AnimeDetails: React.FC<Props> = ({ movie, saisons }) => {
                           <div className='section-title'>
                             <h5>List Name</h5>
                           </div>
-                          {saisons?.map((saison: Saison) => (
+                          {saisons.map((saison: Saison) => (
                             <Link
                               key={saison._id}
                               href={`/saison-details/${saison._id}`}
@@ -275,6 +275,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       movie,
+      saisons: [],
     },
     revalidate: 60, // after 60 seconds, it will update the old cache version
   }
