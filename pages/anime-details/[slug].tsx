@@ -12,10 +12,12 @@ import SingleSkeleton from '../../components/SingleSkeleton'
 
 interface Props {
   movie: Movie
+  saisons: Saison[]
 }
 
-const AnimeDetails: React.FC<Props> = ({ movie }) => {
+const AnimeDetails: React.FC<Props> = ({ movie, saisons }) => {
   const [loading, setLoading] = useState(true)
+  console.log(saisons)
 
   useEffect(() => {
     if (movie) {
@@ -145,35 +147,40 @@ const AnimeDetails: React.FC<Props> = ({ movie }) => {
                       </div>
                     </div>
                     <div className='anime__details__btn'>
-                      <a href='#' className='follow-btn'>
-                        <i className='fa fa-heart-o'></i> Follow
-                      </a>
-                      <a
-                        href={
-                          movie.type === 'Movie'
-                            ? movie.externalLink
-                            : `/anime-watching/${movie._id}`
-                        }
-                        className='watch-btn'
-                      >
-                        {movie.type === 'Movie' ? (
-                          <>
-                            <span>Download Now</span>
-                            <i className='fa fa-download'></i>
-                          </>
-                        ) : (
-                          <>
-                            <span>View Saisons</span>
-                            <i className='fa fa-eye'></i>
-                          </>
-                        )}
-                      </a>
+                      {saisons.length === 0 ? (
+                        <a
+                          href={
+                            movie.type === 'Movie'
+                              ? movie.externalLink
+                              : `/anime-watching/${movie._id}`
+                          }
+                          className='watch-btn'
+                        >
+                          <span>Download Now</span>
+                          <i className='fa fa-download'></i>
+                        </a>
+                      ) : (
+                        <div className='anime__details__episodes'>
+                          <div className='section-title'>
+                            <h5>List Name</h5>
+                          </div>
+                          {saisons.map((saison: Saison) => (
+                            <Link
+                              key={saison._id}
+                              href={`/saison-details/${saison._id}`}
+                            >
+                              {saison.name.split(' - ')[1]}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           )}
+
           <div className='row'>
             <Reviews movie={movie} />
             <SimilarMovie />
@@ -230,13 +237,38 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                   externalLink,
                 }`
 
-  const movie = await sanityClient.fetch(query, {
+  const movie: Movie = await sanityClient.fetch(query, {
     slug: params?.slug,
   })
 
   if (!movie) {
     return {
       notFound: true,
+    }
+  }
+
+  const saisonsQuery = `* [_type == 'saison' && serie._ref == $_id] {
+                      _id,
+                      _createdAt,
+                      name, 
+                      description,
+                      serie -> {
+                        title,
+                        body,
+                      },
+                  }`
+
+  const saisons = await sanityClient.fetch(saisonsQuery, {
+    _id: movie._id,
+  })
+
+  if (saisons.length !== 0) {
+    return {
+      props: {
+        movie,
+        saisons,
+      },
+      revalidate: 60, // after 60 seconds, it will update the old cache version
     }
   }
 

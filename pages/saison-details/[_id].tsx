@@ -1,8 +1,7 @@
 import React from 'react'
-import Link from 'next/link'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import { sanityClient } from '../../lib/sanity'
+import { sanityClient, urlFor } from '../../lib/sanity'
 import { GetStaticProps } from 'next'
 
 interface Props {
@@ -14,122 +13,128 @@ const SaisonDetails = ({ episodes }: Props) => {
     <>
       <Header />
 
-      <section className='anime-details spad'>
+      <section className='blog-details spad'>
         <div className='container'>
-          <div className='row'>
-            <div className='col-lg-12'>
-              <div className='anime__details__text'>
-                <div className='anime__details__title'>
-                  <h3>{episodes[0].saison.name.split(' - ')[1]}</h3>
-                  {/* <span>フェイト／ステイナイト, Feito／sutei naito</span> */}
+          <div className='row d-flex justify-content-center'>
+            <div className='col-lg-8'>
+              <div className='blog__details__title'>
+                <h2>
+                  {episodes[0].saison.name.split(' - ')[1]}: {episodes.length}{' '}
+                  Episodes of Essential Viewing
+                </h2>
+                <div className='blog__details__social'>
+                  <a href='#' className='facebook'>
+                    <i className='fa fa-facebook-square'></i> Facebook
+                  </a>
+                  <a href='#' className='pinterest'>
+                    <i className='fa fa-pinterest'></i> Pinterest
+                  </a>
+                  <a href='#' className='linkedin'>
+                    <i className='fa fa-linkedin-square'></i> Linkedin
+                  </a>
+                  <a href='#' className='twitter'>
+                    <i className='fa fa-twitter-square'></i> Twitter
+                  </a>
                 </div>
-                <p>{episodes[0].saison.description}</p>
-              </div>
-
-              <div className='anime__details__episodes'>
-                <div className='section-title'>
-                  <h5>List Name</h5>
-                </div>
-                {episodes.map((episode: Episode) => (
-                  <Link
-                    key={episode._id}
-                    href={`/episode-details/${episode._id}`}
-                  >
-                    {episode.name.split(' - ')[2]}
-                  </Link>
-                ))}
               </div>
             </div>
-          </div>
-          <div className='row'>
+
             <div className='col-lg-8'>
-              <div className='anime__details__review'>
-                <div className='section-title'>
-                  <h5>Reviews</h5>
+              <div className='blog__details__content'>
+                <div className='blog__details__text'>
+                  <p>{episodes[0].saison.description}</p>
                 </div>
-                <div className='anime__review__item'>
-                  <div className='anime__review__item__pic'>
-                    <img src='/img/anime/review-1.jpg' alt='' />
+                {episodes.map((episode: Episode) => (
+                  <div className='blog__details__item__text' key={episode._id}>
+                    <h4>{episode.name.split(' - ')[2]}</h4>
+                    <div
+                      className='anime__details__pic set-bg'
+                      style={{
+                        backgroundImage: `url(${urlFor(
+                          episode.mainImage
+                        ).url()})`,
+                      }}
+                    ></div>
+                    <p>{episode.description}</p>
+                    <div className='anime__details__btn'>
+                      <a href={episode.externalLink} className='watch-btn'>
+                        <span>Download Now</span>{' '}
+                        <i className='fa fa-download'></i>
+                      </a>
+                    </div>
                   </div>
-                  <div className='anime__review__item__text'>
-                    <h6>
-                      Chris Curry - <span>1 Hour ago</span>
-                    </h6>
-                    <p>
-                      whachikan Just noticed that someone categorized this as
-                      belonging to the genre "demons" LOL
-                    </p>
+                ))}
+
+                <div className='blog__details__comment'>
+                  <h4>3 Comments</h4>
+                  <div className='blog__details__comment__item'>
+                    <div className='blog__details__comment__item__pic'>
+                      <img src='/img/blog/details/comment-1.png' alt='' />
+                    </div>
+                    <div className='blog__details__comment__item__text'>
+                      <span>Sep 08, 2020</span>
+                      <h5>John Smith</h5>
+                      <p>
+                        Neque porro quisquam est, qui dolorem ipsum quia dolor
+                        sit amet, consectetur, adipisci velit, sed quia non
+                        numquam eius modi
+                      </p>
+                      <a href='#'>Like</a>
+                      <a href='#'>Reply</a>
+                    </div>
+                  </div>
+                  <div className='blog__details__comment__item blog__details__comment__item--reply'>
+                    <div className='blog__details__comment__item__pic'>
+                      <img src='/img/blog/details/comment-2.png' alt='' />
+                    </div>
+                    <div className='blog__details__comment__item__text'>
+                      <span>Sep 08, 2020</span>
+                      <h5>Elizabeth Perry</h5>
+                      <p>
+                        Neque porro quisquam est, qui dolorem ipsum quia dolor
+                        sit amet, consectetur, adipisci velit, sed quia non
+                        numquam eius modi
+                      </p>
+                      <a href='#'>Like</a>
+                      <a href='#'>Reply</a>
+                    </div>
+                  </div>
+                  <div className='blog__details__comment__item'>
+                    <div className='blog__details__comment__item__pic'>
+                      <img src='/img/blog/details/comment-3.png' alt='' />
+                    </div>
+                    <div className='blog__details__comment__item__text'>
+                      <span>Sep 08, 2020</span>
+                      <h5>Adrian Coleman</h5>
+                      <p>
+                        Neque porro quisquam est, qui dolorem ipsum quia dolor
+                        sit amet, consectetur, adipisci velit, sed quia non
+                        numquam eius modi
+                      </p>
+                      <a href='#'>Like</a>
+                      <a href='#'>Reply</a>
+                    </div>
                   </div>
                 </div>
-                <div className='anime__review__item'>
-                  <div className='anime__review__item__pic'>
-                    <img src='/img/anime/review-2.jpg' alt='' />
-                  </div>
-                  <div className='anime__review__item__text'>
-                    <h6>
-                      Lewis Mann - <span>5 Hour ago</span>
-                    </h6>
-                    <p>Finally it came out ages ago</p>
-                  </div>
+                <div className='blog__details__form'>
+                  <h4>Leave A Commnet</h4>
+                  <form action='#'>
+                    <div className='row'>
+                      <div className='col-lg-6 col-md-6 col-sm-6'>
+                        <input type='text' placeholder='Name' />
+                      </div>
+                      <div className='col-lg-6 col-md-6 col-sm-6'>
+                        <input type='text' placeholder='Email' />
+                      </div>
+                      <div className='col-lg-12'>
+                        <textarea placeholder='Message'></textarea>
+                        <button type='submit' className='site-btn'>
+                          Send Message
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <div className='anime__review__item'>
-                  <div className='anime__review__item__pic'>
-                    <img src='/img/anime/review-3.jpg' alt='' />
-                  </div>
-                  <div className='anime__review__item__text'>
-                    <h6>
-                      Louis Tyler - <span>20 Hour ago</span>
-                    </h6>
-                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                  </div>
-                </div>
-                <div className='anime__review__item'>
-                  <div className='anime__review__item__pic'>
-                    <img src='/img/anime/review-4.jpg' alt='' />
-                  </div>
-                  <div className='anime__review__item__text'>
-                    <h6>
-                      Chris Curry - <span>1 Hour ago</span>
-                    </h6>
-                    <p>
-                      whachikan Just noticed that someone categorized this as
-                      belonging to the genre "demons" LOL
-                    </p>
-                  </div>
-                </div>
-                <div className='anime__review__item'>
-                  <div className='anime__review__item__pic'>
-                    <img src='/img/anime/review-5.jpg' alt='' />
-                  </div>
-                  <div className='anime__review__item__text'>
-                    <h6>
-                      Lewis Mann - <span>5 Hour ago</span>
-                    </h6>
-                    <p>Finally it came out ages ago</p>
-                  </div>
-                </div>
-                <div className='anime__review__item'>
-                  <div className='anime__review__item__pic'>
-                    <img src='/img/anime/review-6.jpg' alt='' />
-                  </div>
-                  <div className='anime__review__item__text'>
-                    <h6>
-                      Louis Tyler - <span>20 Hour ago</span>
-                    </h6>
-                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                  </div>
-                </div>
-              </div>
-              <div className='anime__details__form'>
-                <div className='section-title'>
-                  <h5>Your Comment</h5>
-                </div>
-                <form action='#'>
-                  <textarea placeholder='Your Comment'></textarea>
-                  <button type='submit'>
-                    <i className='fa fa-location-arrow'></i> Review
-                  </button>
-                </form>
               </div>
             </div>
           </div>
@@ -168,7 +173,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                       saison -> {
                         name, 
                         description
-                      }
+                      },
+                      description, 
+                      mainImage,
                   }`
 
   const episodes = await sanityClient.fetch(query, {
