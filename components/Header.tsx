@@ -3,9 +3,11 @@ import Link from 'next/link'
 import { MdViewList } from 'react-icons/md'
 import Sidebar from './Sidebar'
 import { data } from '../utils/data'
+import SearchInput from './SearchInput'
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false)
 
   return (
     <>
@@ -46,7 +48,7 @@ const Header: React.FC = () => {
                       </ul>
                     </li>
                     <li>
-                      <Link href='#'>Contacts</Link>
+                      <Link href='/contact'>Contacts</Link>
                     </li>
                   </ul>
                 </nav>
@@ -54,7 +56,10 @@ const Header: React.FC = () => {
             </div>
             <div className='col-lg-2'>
               <div className='header__right'>
-                <a href='#' className='search-switch'>
+                <a
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                  className='search-switch'
+                >
                   <span className='icon_search'></span>
                 </a>
                 <a href='/login'>
@@ -69,6 +74,7 @@ const Header: React.FC = () => {
               </div>
             </div>
           </div>
+          {isSearchOpen && <SearchInput />}
         </div>
       </header>
     </>
